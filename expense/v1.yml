@@ -14,8 +14,8 @@ spec:
 #  name: backend
 #spec:
 #  containers:
-#    - name: nginx
-#      image: nginx
+#    - name: backend
+#      image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/backend:2.0.0
 #
 #---
 #apiVersion: v1
@@ -25,5 +25,5 @@ spec:
 #spec:
 #  containers:
 #    - name: mysql
-#      image: mysql 5.7
+#      image: mysql:5.7
 #
