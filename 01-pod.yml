@@ -6,9 +6,7 @@ metadata:
     app: test1
   annotations:
     pod1/test1: sample
-  spec:
-    containers:
-      - name: nginx
-        image: nginx
-
-
+spec:
+  containers:
+    - name: nginx
+      image: nginx
