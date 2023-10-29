@@ -2,18 +2,35 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: frontend
+  labels:   # need to mention so that service can pick the pod as per the selector given in service
+    app: frontend
 spec:
   containers:
     - name: frontend
-      image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/frontend:2.0.0
-  imagePullSecrets:
+      image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/frontend:2.0.0   # image from aws-ecr along with tag
+  imagePullSecrets:  # needed to authenticate k8s to pull image from aws-ecr
     - name: aws-ecr
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  type: NodePort # required as we need to access frontend from outside world, for backend and MySQL is not needed as they are for internal communication
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
 ---
 apiVersion: v1
 kind: Pod
 metadata:
   name: backend
+  labels:
+    app: backend
 spec:
   containers:
     - name: backend
@@ -23,9 +40,24 @@ spec:
 
 ---
 apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: mysql
+  labels:
+    app: mysql
 spec:
   containers:
     - name: mysql
@@ -33,3 +65,16 @@ spec:
       env:
         - name: MYSQL_ROOT_PASSWORD
           value: "ExpenseApp@1"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  selector:
+    app: mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
