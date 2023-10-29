@@ -81,3 +81,24 @@ spec:
     - protocol: TCP
       port: 3306
       targetPort: 3306
+
+---
+apiVersion: batch/v1 # this section is called as job, similar to pod but this will run only once. if we have 10 backend containers no need of 10 schema pods, one pod does the job, hence going for job
+kind: Job
+metadata:
+  name: schema
+spec:
+  template:
+    spec:
+      containers:
+        - name: schema
+          image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/schema:2.0.0
+          env:
+            - name: DB_HOST
+              value: mysql
+            - name: DBPASS
+              value: "ExpenseApp@1"
+            - name: DBUSER
+              value: root
+            - name: COMPONENT
+              value: backend
