@@ -94,7 +94,7 @@ spec:
         - name: aws-ecr
       containers:
         - name: schema
-          image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/expense_schema_load:2.0.0 # it requires separate image which needs separate Dockerfile
+          image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/expense_schema_load:2.0.1 # it requires separate image which needs separate Dockerfile
           env:
             - name: DB_HOST
               value: mysql
