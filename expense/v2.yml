@@ -38,7 +38,7 @@ spec:
       image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/backend:2.0.0
       env: # needed as backend need to communicate to mysql
         - name: DB_HOST # in backend.service file environment is given as DB_HOST --> mentioning the same here
-          value: mysql
+          value: prod-mysql.cluster-ci0wnnvfomah.us-east-1.rds.amazonaws.com
   imagePullSecrets:
     - name: aws-ecr
 
