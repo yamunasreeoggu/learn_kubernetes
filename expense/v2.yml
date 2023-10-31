@@ -18,7 +18,7 @@ kind: Service
 metadata:
   name: frontend
 spec:
-  type: LoadBalancer # required as we need to access frontend
+  type: LoadBalancer # required as we need to access frontend through DNS URL
   selector:
     app: frontend
   ports:
