@@ -71,10 +71,10 @@ spec:
           image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/expense_schema_load:2.0.2 # it requires separate image which needs separate Dockerfile
           env:
             - name: DBHOST
-              value: mysql
+              value: prod-mysql.cluster-ci0wnnvfomah.us-east-1.rds.amazonaws.com
             - name: DBPASS
-              value: "ExpenseApp@1"
+              value: "expenseprod1234"
             - name: DBUSER
-              value: root
+              value: mysqlrdsadmin
             - name: COMPONENT
               value: backend
