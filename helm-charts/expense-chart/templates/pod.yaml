@@ -21,7 +21,7 @@ spec:
       - mountPath: /config
         name: config
   containers:
-    - name: { { .Values.appName } }
+    - name: {{ .Values.appName }}
       image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/{{ .Values.appName }}:{{ .Values.appVersion }}
       volumeMounts:
       - mountPath: /config
