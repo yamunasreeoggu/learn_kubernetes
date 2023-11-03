@@ -1,36 +1,36 @@
-# This file is for EKS
-apiVersion: v1
-kind: ServiceAccount #required to provide roles to container, otherwise containers will use roles of ec2 instances which cause security concerns
-metadata:
-  name: frontend
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::492681564023:role/prod-expense-frontend-eks-sa
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: frontend
-  labels:   # need to mention so that service can pick the pod as per the selector given in service
-    app: frontend
-spec:
-  serviceAccountName: frontend # required to provide roles to container
-  containers:
-    - name: frontend
-      image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/frontend:2.0.2   # image from aws-ecr along with tag
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend
-spec:
-  type: LoadBalancer # required as we need to access frontend through DNS URL
-  selector:
-    app: frontend
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
----
+## This file is for EKS
+#apiVersion: v1
+#kind: ServiceAccount #required to provide roles to container, otherwise containers will use roles of ec2 instances which cause security concerns
+#metadata:
+#  name: frontend
+#  annotations:
+#    eks.amazonaws.com/role-arn: arn:aws:iam::492681564023:role/prod-expense-frontend-eks-sa
+#---
+#apiVersion: v1
+#kind: Pod
+#metadata:
+#  name: frontend
+#  labels:   # need to mention so that service can pick the pod as per the selector given in service
+#    app: frontend
+#spec:
+#  serviceAccountName: frontend # required to provide roles to container
+#  containers:
+#    - name: frontend
+#      image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/frontend:2.0.2   # image from aws-ecr along with tag
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: frontend
+#spec:
+#  type: LoadBalancer # required as we need to access frontend through DNS URL
+#  selector:
+#    app: frontend
+#  ports:
+#    - protocol: TCP
+#      port: 80
+#      targetPort: 80
+#---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
