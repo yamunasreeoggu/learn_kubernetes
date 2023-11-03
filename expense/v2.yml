@@ -31,53 +31,53 @@
 #      port: 80
 #      targetPort: 80
 #---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: backend
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::492681564023:role/prod-expense-backend-eks-sa
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: backend
-  labels:
-    app: backend
-spec:
-  serviceAccountName: backend
-  initContainers:
-    - name: aws-param
-      image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/expense_parameter_init_container:2.0.2
-      env:
-        - name: INPUT
-          value: "DB_HOST,prod.rds.endpoint"
-      volumeMounts:
-        - mountPath: /config
-          name: config
-  containers:
-    - name: backend
-      image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/backend:2.0.1
-      volumeMounts:
-        - mountPath: /config
-          name: config
-  volumes:
-    - name: config
-      emptyDir:
-        sizeLimit: 5Mi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend
-spec:
-  selector:
-    app: backend
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
----
+#apiVersion: v1
+#kind: ServiceAccount
+#metadata:
+#  name: backend
+#  annotations:
+#    eks.amazonaws.com/role-arn: arn:aws:iam::492681564023:role/prod-expense-backend-eks-sa
+#---
+#apiVersion: v1
+#kind: Pod
+#metadata:
+#  name: backend
+#  labels:
+#    app: backend
+#spec:
+#  serviceAccountName: backend
+##  initContainers:
+#    - name: aws-param
+#      image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/expense_parameter_init_container:2.0.2
+#      env:
+#        - name: INPUT
+#          value: "DB_HOST,prod.rds.endpoint"
+#      volumeMounts:
+#        - mountPath: /config
+#          name: config
+#  containers:
+#    - name: backend
+#      image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/backend:2.0.1
+#      volumeMounts:
+#        - mountPath: /config
+#          name: config
+#  volumes:
+#    - name: config
+#      emptyDir:
+#        sizeLimit: 5Mi
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: backend
+#spec:
+#  selector:
+#    app: backend
+#  ports:
+#    - protocol: TCP
+#      port: 80
+#      targetPort: 8080
+#---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
