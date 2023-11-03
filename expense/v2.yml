@@ -96,7 +96,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: aws-param
-          image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/eexpense_parameter_init_container:2.0.2 # it requires separate image which needs separate Dockerfile
+          image: 492681564023.dkr.ecr.us-east-1.amazonaws.com/expense_parameter_init_container:2.0.2 # it requires separate image which needs separate Dockerfile
           env:
             - name: INPUT
               value: "DBHOST,prod.rds.endpoint DBUSER,prod.rds.master_username DBPASS,prod.rds.master_password"
