@@ -30,4 +30,4 @@ spec:
         - name: config
           emptyDir:
             sizeLimit: 5Mi
-  {{ end }}
+{{ end }}
