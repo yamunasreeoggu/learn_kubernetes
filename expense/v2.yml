@@ -78,13 +78,13 @@
 #      port: 80
 #      targetPort: 8080
 #---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: schema
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::492681564023:role/prod-expense-schema-eks-sa
----
+#apiVersion: v1
+#kind: ServiceAccount
+#metadata:
+#  name: schema
+#  annotations:
+#    eks.amazonaws.com/role-arn: arn:aws:iam::492681564023:role/prod-expense-schema-eks-sa
+#---
 #apiVersion: batch/v1 # this section is called as job, similar to pod but this will run only once. if we have 10 backend containers no need of 10 schema pods, one pod does the job, hence going for job
 #kind: Job
 #metadata:
